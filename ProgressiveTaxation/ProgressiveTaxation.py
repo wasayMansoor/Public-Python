@@ -4,6 +4,7 @@
 
 #To DO:
     #Add Exception Handling
+    #Validation && For incomeCaps (assure that next incomeCap is greater than previous income)
 
 #Function That Calculates Total Taxes
 def calculateTax(taxRates, incomeCap, income):
@@ -23,7 +24,7 @@ def calculateTax(taxRates, incomeCap, income):
 taxRates = []
 incomeCap = []
 #Input Of How Many Income Caps there are
-numOfCaps = int(input("How Many Income Caps: "))
+numOfCaps = int(input("How Many Tax Brackets: "))
 
 #Loop For Inputing Individual Caps And Tax Rates At Each Cap
 #Then Appending Input To Lists
@@ -37,17 +38,19 @@ for i in range(numOfCaps):
 
 #Loop Repeated Until User Exits
 while True:
+    print()
     #Input Income With Command For Exiting Program
     income = int(input("Type -1 To Exit Or Type Income(In Thousands): "))
+    income = income * 1000
     if income >= 0:
         #Total Tax Calculated By Calling Function
         totalTax = int(calculateTax(taxRates, incomeCap,income))
         #Overall Individual Tax Rate Calculated
-        overallTaxRate = totalTax/income
+        overallTaxRate = int((totalTax/income) *100)
 
         #Producing And Outputs Dictionary For Easier Output
         outputs = {'TT': totalTax, 'I': income, 'OTR': overallTaxRate}
-        print("Total tax of {TT} on an income of {I} with a overall tax rate of {OTR}".format(**outputs))
+        print("Total tax of {TT} on an income of {I} with a overall tax rate of {OTR}%".format(**outputs))
     #Exit
     elif income == -1:
         exit(0)
